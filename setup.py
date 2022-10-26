@@ -9,7 +9,7 @@ setup(
     This name will be used when people try to do pip install. And it is CASE SENSITIVE. 
     You should create an unique name. Search on pypi.org to see if the name is taken or not.
     '''
-    name = 'YourPackageName', 
+    name = 'QRCode', 
     
     '''
     The version number of your package consists of three integers "Major.Minor.Patch".
@@ -22,7 +22,7 @@ setup(
     '''
     This is the short description will show on the top of the webpage of your package on pypi.org
     '''
-    description = 'An NLP python package for computing Boilerplate score and many other text features.',
+    description = 'A python package that allow to share files from persona computer to mobile phone easly.',
     
     '''
     This is the name of your main module file. No need to include the .py at the end.
