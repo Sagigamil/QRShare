@@ -27,7 +27,7 @@ setup(
     '''
     This is the name of your main module file. No need to include the .py at the end.
     '''    
-    py_modules = ["TheModuleName"],
+    py_modules = ["QRShare"],
     
     '''
     Leave it as default. It shows where the module is stored.

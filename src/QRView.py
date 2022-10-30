@@ -1,3 +1,4 @@
+import qrcode
 from ViewInterface import ViewInterface
 
 class QRView(ViewInterface):
@@ -11,6 +12,6 @@ class QRView(ViewInterface):
         pass
     
     def view(self, str):
-        # TODO pass
-        pass
+        img = qrcode.make(str)
+        img.show()
         

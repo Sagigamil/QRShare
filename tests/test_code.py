@@ -13,4 +13,3 @@ def main():
     remote_path = client.upload(LOCAL_FILE_PATH)
     view.show(remote_path)
     
-        
