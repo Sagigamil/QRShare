@@ -4,9 +4,9 @@ from setuptools import setup
 ################ You May Remove All the Comments Once You Finish Modifying the Script ################
 ######################################################################################################
 
-setup(name = 'QRCode', 
+setup(name = 'QRShare', 
       version = '0.1.0',
-      description = 'A python package that allow to share files from persona computer to mobile phone easly.',
+      description = 'A python package that allow to share files from personl computer to mobile phone easly.',
       py_modules = ["QRShare"],
       package_dir = {'':'src'},
       author = 'AuthorName',
@@ -32,7 +32,12 @@ setup(name = 'QRCode',
         'Operating System :: OS Independent',
     ],
     install_requires = [
-        'qrcode[pil] ~= 7.3.1',
+        'qrcode[pil]',
     ],
     keywords = [],
+    entry_points = { 
+        'console_scripts': [
+            'qrshare=QRShare:main'
+        ]
+    }
 )
