@@ -1,5 +1,4 @@
 
-
 class ClientInterface(object):
     def __init__(self, *args):
         super(ClientInterface, self).__init__(*args)

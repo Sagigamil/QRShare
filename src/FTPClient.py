@@ -1,4 +1,4 @@
-from ClientInterface import ClientInterface
+from src.ClientInterface import ClientInterface
 
 class FTPClient(ClientInterface):
     def __init__(self, ip, port, user='', password=''):

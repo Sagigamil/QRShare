@@ -1,6 +1,6 @@
 from functools import partial
 import http.server as BaseHTTPServer
-from ClientInterface import ClientInterface
+from src.ClientInterface import ClientInterface
 from threading import Thread
 import os
 import shutil
