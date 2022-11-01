@@ -2,7 +2,7 @@ from xmlrpc.client import ProtocolError
 
 from click import password_option
 from ClientInterface import ClientInterface
-from ftplib import FTP_PORT
+from ftplib import FTP
 import os
 
 class FTPClient(ClientInterface):
