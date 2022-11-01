@@ -6,9 +6,8 @@ from ftplib import FTP_PORT
 import os
 
 class FTPClient(ClientInterface):
-    def __init__(        # Build ftp object etcself, ip, port, user='', password=''):
+    def __init__():
         self.ip = ip
-        self.port = port
         self.user = user
         self.password = password
 
@@ -20,7 +19,7 @@ class FTPClient(ClientInterface):
         pass
     
     def upload(self, local_file_path):
-        
+
         ftp = FTP(self.ip)
         ftp.login(user = self.user, passwd = self.password)
         ftp.cwd('/shared')
