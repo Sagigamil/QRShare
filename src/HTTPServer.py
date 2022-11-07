@@ -6,6 +6,7 @@ import os
 import shutil
 import socket
 
+
 class HTTPServer(ClientInterface):
     class Handler(BaseHTTPServer.BaseHTTPRequestHandler):
         def __init__(self, http_server, *kwargs):
@@ -13,22 +14,29 @@ class HTTPServer(ClientInterface):
             super(HTTPServer.Handler, self).__init__(*kwargs)
 
         def do_GET(self):
-            with open(self._http_server._path, 'rb') as f:
+            with open(self._http_server._path, "rb") as f:
                 self.send_response(200)
-                self.send_header("Content-Type", 'application/octet-stream')
-                self.send_header("Content-Disposition", 'attachment; filename="{}"'.format(os.path.basename(self._http_server._path)))
+                self.send_header("Content-Type", "application/octet-stream")
+                self.send_header(
+                    "Content-Disposition",
+                    'attachment; filename="{}"'.format(
+                        os.path.basename(self._http_server._path)
+                    ),
+                )
                 fs = os.fstat(f.fileno())
                 self.send_header("Content-Length", str(fs.st_size))
                 self.end_headers()
                 shutil.copyfileobj(f, self.wfile)
 
             self._http_server._is_running = False
-    
+
     @staticmethod
     def _get_ip():
         return socket.gethostbyname(socket.gethostname())
-    
-    def __init__(self, ip='', port=9595, protocol_version="HTTP/1.0", password='', timeout=120):
+
+    def __init__(
+        self, ip="", port=9595, protocol_version="HTTP/1.0", password="", timeout=120
+    ):
         self._ip = ip if ip else HTTPServer._get_ip()
         self._port = port
         self._protocol_version = protocol_version
@@ -36,25 +44,25 @@ class HTTPServer(ClientInterface):
         self._http = None
         self._timeout = timeout
         self._is_running = True
-        
+
     def shutdown(self):
         self._is_running = False
         if self._thread:
             self._thread.join()
-    
+
     def __del__(self):
         self.shutdown()
-        
+
     @staticmethod
     def validate_init_params(self, params):
         # raise error on bad params. Return nothing
         pass
-    
+
     @staticmethod
     def _serve_forever(http):
         while http._is_running:
             http._http.handle_request()
-        
+
     def upload(self, local_file_path):
         self._path = local_file_path
         self._is_running = True
