@@ -32,7 +32,7 @@ setup(name = 'QRShare',
         'Operating System :: OS Independent',
     ],
     install_requires = [
-        'qrcode[pil]',
+        'qrcode[pil] == 7.3.1',
     ],
     keywords = [],
     entry_points = { 
