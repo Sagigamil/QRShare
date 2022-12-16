@@ -28,9 +28,7 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "Operating System :: OS Independent",
     ],
-    install_requires=[
-        "qrcode[pil] == 7.3.1",
-    ],
+    install_requires=["qrcode[pil] == 7.3.1", "pyftplib == 1.5.6"],
     keywords=[],
     entry_points={"console_scripts": ["qrshare=QRShare:main"]},
 )
