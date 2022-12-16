@@ -1,6 +1,6 @@
 from functools import partial
 import http.server as BaseHTTPServer
-from src.ClientInterface import ClientInterface
+from .ClientInterface import ClientInterface
 from threading import Thread
 import os
 import shutil
@@ -34,9 +34,11 @@ class HTTPServer(ClientInterface):
     def _get_ip():
         return socket.gethostbyname(socket.gethostname())
 
-    def __init__(
-        self, ip="", port=9595, protocol_version="HTTP/1.0", password="", timeout=120
-    ):
+    def __init__(self,
+                 ip="",
+                 port=9595,
+                 protocol_version="HTTP/1.0",
+                 timeout=120):
         self._ip = ip if ip else HTTPServer._get_ip()
         self._port = port
         self._protocol_version = protocol_version

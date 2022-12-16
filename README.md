@@ -1,173 +1,404 @@
-# Your First Python Package on PyPI
+# qrshare
 
-Reference Blog: https://towardsdatascience.com/an-end-to-end-guide-to-publish-your-python-package-bdb56639662c
+<div align="center">
 
-## [![Typing SVG](https://readme-typing-svg.herokuapp.com?multiline=true&width=1200&lines=An+end+to+end+project+helps+you+publish+your+first+python+package+in+a+simple+way.++++++++++)](https://git.io/typing-svg)
+[![Build status](https://github.com/qrshare/qrshare/workflows/build/badge.svg?branch=master&event=push)](https://github.com/qrshare/qrshare/actions?query=workflow%3Abuild)
+[![Python Version](https://img.shields.io/pypi/pyversions/qrshare.svg)](https://pypi.org/project/qrshare/)
+[![Dependencies Status](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)](https://github.com/qrshare/qrshare/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Aapp%2Fdependabot)
 
-## Step 1
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Security: bandit](https://img.shields.io/badge/security-bandit-green.svg)](https://github.com/PyCQA/bandit)
+[![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/qrshare/qrshare/blob/master/.pre-commit-config.yaml)
+[![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/qrshare/qrshare/releases)
+[![License](https://img.shields.io/github/license/qrshare/qrshare)](https://github.com/qrshare/qrshare/blob/master/LICENSE)
+![Coverage Report](assets/images/coverage.svg)
 
-Go to the following two websites to register your own account, respectively.
-- PyPI test: https://test.pypi.org/
-- PyPI: https://pypi.org/
+Awesome `qrshare` is a Python cli/package created with https://github.com/TezRomacH/python-package-template
 
-Note: I highly recommend trying your package on the test site first to avoid mistakes in the uploading process. Since any change, you make to your package on PyPI is not revertable, uploading errors may lead to a malfunctioning patch for your package. You want to avoid that!!
+</div>
 
+## Very first steps
 
-## Step 2
+### Initialize your code
 
-Fork this repository to your own GitHub account and make it available in your local. You can make the most changes on GitHub, but you will need to publish your package via cmd with those files available in local.
+1. Initialize `git` inside your repo:
 
-And here is the list of the core files you will need:
-
-* src
-  * \_\_init\_\_.py
-  * your_main_code.py  (This is only one module, if you have multi-modules included in this package, you probably want to create subfolders for them. For details, check the OPTIONAL part following this section.)
-* setup.py
-* README.md
-* MANIFEST.in
-* LICENSE
-* pyproject.toml
-* CHANGELOG.md
-
-I know that's a lot. But bear with me. You only need to make necessary changes to some of them, and the rest will stay as default.
-
-## OPTIONAL - Multiple Modules
-Suppose you have multiple classes with functions created in separate files. You want to make the folders (or subfolders) following this convention:
-
-* Lib1
-  * \_\_init\_\_.py
-  * \_Class1.py
-  * \_Class2.py
-
-* Lib2
-  * ...
-  * ...
-
-Inside each folder, update the "\_\_init\_\_.py" by doing this:
-
-    from ._Class1 import Function1
-    from ._Class1 import Function2
-    from ._Class2 import Function1
-    ... 
-
-In the main folder, update the "\_\_init\_\_.py" by doing this:
-
-    from Lib1._Class1 import Function1
-    from Lib1._Class1 import Function2
-    from Lib1._Class2 import Function1
-    ... 
-
-Then the users will be able to import your library properly like this:
-
-    from YourPackage.Class1 import Function1
-    
-If You want to import something from the main (previous) folder, here is what you should do:
-
-    from .._ClassFromThePreviousFolder import Function1
-    
-Consider adding a list in your "\_\_init\_\_.py", so that the users can check what functions are available:
-
-    __all__ = [ 'Function1',
-                'Function2',
-                ...,
-                'FunctionN'
-    ]
-    
-
-## Step 3
-
-Install the following python package in your cmd:
-
-```css
-pip install setuptools
-pip install twine
-pip install wheel
-pip install pytest # optional
+```bash
+cd qrshare && git init
 ```
 
-You will need them later.
+2. If you don't have `Poetry` installed run:
 
-## Step 4
-
-Do the following changes in ANY order you want:
-
-1. Replace your_main_code.py in src folder with your own python package and leave "\_\_init\_\_.py" as it is.
-2. Make changes to setup.py, and instructions included in that file.
-3. Pick your own license. 
-  * Open the LICENSE file, click on Edit, click "Choose a license template", and select the license fullfills your needs.
-  * If you have no idea which license works for you, you can use the MIT license, which is one of the most common choices.
-  * Or, you can use this link to pick one: https://choosealicense.com/
-4. Update CHANGELOG.md to reflect version information
-5. Optional: create a "test.py" and put the file in the tests folder. Or you can remove the whole folder if you are confident that everything works great in your module.
-6. Delete everything in this "README.md" file, and update the file with the long decription of your package.
-
-## Step 5
-
-You have multiple choices for step 5 to perform the rest of the steps. Here are two examples:
-
-1. Do it in cmd - Command Prompt
-- In your local, open the cmd, navigate to the directory where your package is and type the following:
-```css
-# First, change root disk
-C:\User\Yourname> d:
-
-# Second, navigate to the folder
-D:\> cd D:\my_works\Your-First-Python-Package-on-PyPI
+```bash
+make poetry-download
 ```
 
-2. Do it in the Jupyter Notebook terminal:
-```css
-C:\User\Yourname> jupyter notebook --notebook-dir D:/my_works/Your-First-Python-Package-on-PyPI
+3. Initialize poetry and install `pre-commit` hooks:
+
+```bash
+make install
+make pre-commit-install
 ```
 
-## Step 6
+4. Run the codestyle:
 
-In this step, we will use the following code in cmd/terminal to build your package:
-```css
-python setup.py sdist bdist_wheel
+```bash
+make codestyle
 ```
 
-Once you run the code, you will see the following two folders in the current directory:
-- build
-- dist
+5. Upload initial code to GitHub:
 
-Under the dist folder, you will see a 'tar' file called "TheNameofYourPackage-TheVersionofYourPackage.tar.gz". At this point of time, if you do not need to publish your code in public; instead, if you just want to share your code with your friends or colleagues, you may just share this file with them. All they need to do is to do "pip install" to use your code:
-```css
-pip install relative_path_to_yourpackage.tar.gz  
+```bash
+git add .
+git commit -m ":tada: Initial commit"
+git branch -M main
+git remote add origin https://github.com/qrshare/qrshare.git
+git push -u origin main
 ```
 
-## OPTIONAL - Test Your Package on PyPI
+### Set up bots
 
-Now, you are about to publish your package to PyPI. Before you make it public, one more thing you may want to do is to test if your package will work as expected once people download them. What you can do is to create a folder called "test", and create a test.py, which includes some sample implementations of your package. Then, type "pytest" in your cmd/terminal. If everything works fine, it will run your test.py automatically and pass. Otherwise, it will raise errors and you should fix the bugs accordingly before moving to the next step.
+- Set up [Dependabot](https://docs.github.com/en/github/administering-a-repository/enabling-and-disabling-version-updates#enabling-github-dependabot-version-updates) to ensure you have the latest dependencies.
+- Set up [Stale bot](https://github.com/apps/stale) for automatic issue closing.
 
-And here is one more thing you might want to try to test if the architecture of your package is good to go. In the cmd/terminal, type the following code:
-```css
-twine check dist/*
+### Poetry
+
+Want to know more about Poetry? Check [its documentation](https://python-poetry.org/docs/).
+
+<details>
+<summary>Details about Poetry</summary>
+<p>
+
+Poetry's [commands](https://python-poetry.org/docs/cli/#commands) are very intuitive and easy to learn, like:
+
+- `poetry add numpy@latest`
+- `poetry run pytest`
+- `poetry publish --build`
+
+etc
+</p>
+</details>
+
+### Building and releasing your package
+
+Building a new version of the application contains steps:
+
+- Bump the version of your package `poetry version <version>`. You can pass the new version explicitly, or a rule such as `major`, `minor`, or `patch`. For more details, refer to the [Semantic Versions](https://semver.org/) standard.
+- Make a commit to `GitHub`.
+- Create a `GitHub release`.
+- And... publish 🙂 `poetry publish --build`
+
+## 🎯 What's next
+
+Well, that's up to you 💪🏻. I can only recommend the packages and articles that helped me.
+
+- [`Typer`](https://github.com/tiangolo/typer) is great for creating CLI applications.
+- [`Rich`](https://github.com/willmcgugan/rich) makes it easy to add beautiful formatting in the terminal.
+- [`Pydantic`](https://github.com/samuelcolvin/pydantic/) – data validation and settings management using Python type hinting.
+- [`Loguru`](https://github.com/Delgan/loguru) makes logging (stupidly) simple.
+- [`tqdm`](https://github.com/tqdm/tqdm) – fast, extensible progress bar for Python and CLI.
+- [`IceCream`](https://github.com/gruns/icecream) is a little library for sweet and creamy debugging.
+- [`orjson`](https://github.com/ijl/orjson) – ultra fast JSON parsing library.
+- [`Returns`](https://github.com/dry-python/returns) makes you function's output meaningful, typed, and safe!
+- [`Hydra`](https://github.com/facebookresearch/hydra) is a framework for elegantly configuring complex applications.
+- [`FastAPI`](https://github.com/tiangolo/fastapi) is a type-driven asynchronous web framework.
+
+Articles:
+
+- [Open Source Guides](https://opensource.guide/).
+- [A handy guide to financial support for open source](https://github.com/nayafia/lemonade-stand)
+- [GitHub Actions Documentation](https://help.github.com/en/actions).
+- Maybe you would like to add [gitmoji](https://gitmoji.carloscuesta.me/) to commit names. This is really funny. 😄
+
+## 🚀 Features
+
+### Development features
+
+- Supports for `Python 3.7` and higher.
+- [`Poetry`](https://python-poetry.org/) as the dependencies manager. See configuration in [`pyproject.toml`](https://github.com/qrshare/qrshare/blob/master/pyproject.toml) and [`setup.cfg`](https://github.com/qrshare/qrshare/blob/master/setup.cfg).
+- Automatic codestyle with [`black`](https://github.com/psf/black), [`isort`](https://github.com/timothycrosley/isort) and [`pyupgrade`](https://github.com/asottile/pyupgrade).
+- Ready-to-use [`pre-commit`](https://pre-commit.com/) hooks with code-formatting.
+- Type checks with [`mypy`](https://mypy.readthedocs.io); docstring checks with [`darglint`](https://github.com/terrencepreilly/darglint); security checks with [`safety`](https://github.com/pyupio/safety) and [`bandit`](https://github.com/PyCQA/bandit)
+- Testing with [`pytest`](https://docs.pytest.org/en/latest/).
+- Ready-to-use [`.editorconfig`](https://github.com/qrshare/qrshare/blob/master/.editorconfig), [`.dockerignore`](https://github.com/qrshare/qrshare/blob/master/.dockerignore), and [`.gitignore`](https://github.com/qrshare/qrshare/blob/master/.gitignore). You don't have to worry about those things.
+
+### Deployment features
+
+- `GitHub` integration: issue and pr templates.
+- `Github Actions` with predefined [build workflow](https://github.com/qrshare/qrshare/blob/master/.github/workflows/build.yml) as the default CI/CD.
+- Everything is already set up for security checks, codestyle checks, code formatting, testing, linting, docker builds, etc with [`Makefile`](https://github.com/qrshare/qrshare/blob/master/Makefile#L89). More details in [makefile-usage](#makefile-usage).
+- [Dockerfile](https://github.com/qrshare/qrshare/blob/master/docker/Dockerfile) for your package.
+- Always up-to-date dependencies with [`@dependabot`](https://dependabot.com/). You will only [enable it](https://docs.github.com/en/github/administering-a-repository/enabling-and-disabling-version-updates#enabling-github-dependabot-version-updates).
+- Automatic drafts of new releases with [`Release Drafter`](https://github.com/marketplace/actions/release-drafter). You may see the list of labels in [`release-drafter.yml`](https://github.com/qrshare/qrshare/blob/master/.github/release-drafter.yml). Works perfectly with [Semantic Versions](https://semver.org/) specification.
+
+### Open source community features
+
+- Ready-to-use [Pull Requests templates](https://github.com/qrshare/qrshare/blob/master/.github/PULL_REQUEST_TEMPLATE.md) and several [Issue templates](https://github.com/qrshare/qrshare/tree/master/.github/ISSUE_TEMPLATE).
+- Files such as: `LICENSE`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` are generated automatically.
+- [`Stale bot`](https://github.com/apps/stale) that closes abandoned issues after a period of inactivity. (You will only [need to setup free plan](https://github.com/marketplace/stale)). Configuration is [here](https://github.com/qrshare/qrshare/blob/master/.github/.stale.yml).
+- [Semantic Versions](https://semver.org/) specification with [`Release Drafter`](https://github.com/marketplace/actions/release-drafter).
+
+## Installation
+
+```bash
+pip install -U qrshare
 ```
-You should see something like this:
+
+or install with `Poetry`
+
+```bash
+poetry add qrshare
 ```
-Checking distribution dist/TheNameofYourPackage-TheVersionofYourPackage-1.0.0-py3-none-any.whl: Passed
-Checking distribution dist/TheNameofYourPackage-TheVersionofYourPackage.tar.gz: Passed
+
+Then you can run
+
+```bash
+qrshare --help
 ```
 
-## Step 7
+or with `Poetry`:
 
-Upload your package to TestPyPI:
-```css
-twine upload --repository-url https://test.pypi.org/legacy/ dist/* #pay attention there is an extra space before dist.
+```bash
+poetry run qrshare --help
 ```
-Then you will see a link leading to the testing version of your package on TestPyPI. Check it out! If there are any typos or incompatible bugs, fix them before uploading your package to the real PyPI.
 
-And, now, it is the most exciting moment, upload your package to PyPI to help hundreds of thousands of people in our community:
-```css
-twine upload dist/*
+### Makefile usage
+
+[`Makefile`](https://github.com/qrshare/qrshare/blob/master/Makefile) contains a lot of functions for faster development.
+
+<details>
+<summary>1. Download and remove Poetry</summary>
+<p>
+
+To download and install Poetry run:
+
+```bash
+make poetry-download
 ```
-By this point, your package should be officially online and can be "pip install" by anyone at any time from anywhere. Big moment! I still remember how I felt at the moment when I saw my first package is out there. I told myself, that's why I code! CONGRATULATIONS!!!  
 
+To uninstall
 
-## A few tips
+```bash
+make poetry-remove
+```
 
-- Whenever you want to update your package, you should remove the 'build' and 'dist' folders, make changes to your code, edit the "CHANGLOG.txt" file, and revise the version number in the "setup.py". And repeat steps 5–7.
-- You may upgrade your package after the updates by doing this: ___pip install YOURPACKAGENAME --upgrade___
-- You can always find your package on PyPi here: ___ht<span>tp://</span>pypi.org/project/YOURPACKAGENAME/___
-- Do not publish packages arbitrarily. Even though there are no hard restrictions on what you can or cannot publish, make sure you are uploading something that is actually meaningful and someone will benefit from your work. 
+</p>
+</details>
+
+<details>
+<summary>2. Install all dependencies and pre-commit hooks</summary>
+<p>
+
+Install requirements:
+
+```bash
+make install
+```
+
+Pre-commit hooks coulb be installed after `git init` via
+
+```bash
+make pre-commit-install
+```
+
+</p>
+</details>
+
+<details>
+<summary>3. Codestyle</summary>
+<p>
+
+Automatic formatting uses `pyupgrade`, `isort` and `black`.
+
+```bash
+make codestyle
+
+# or use synonym
+make formatting
+```
+
+Codestyle checks only, without rewriting files:
+
+```bash
+make check-codestyle
+```
+
+> Note: `check-codestyle` uses `isort`, `black` and `darglint` library
+
+Update all dev libraries to the latest version using one comand
+
+```bash
+make update-dev-deps
+```
+
+<details>
+<summary>4. Code security</summary>
+<p>
+
+```bash
+make check-safety
+```
+
+This command launches `Poetry` integrity checks as well as identifies security issues with `Safety` and `Bandit`.
+
+```bash
+make check-safety
+```
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details>
+<summary>5. Type checks</summary>
+<p>
+
+Run `mypy` static type checker
+
+```bash
+make mypy
+```
+
+</p>
+</details>
+
+<details>
+<summary>6. Tests with coverage badges</summary>
+<p>
+
+Run `pytest`
+
+```bash
+make test
+```
+
+</p>
+</details>
+
+<details>
+<summary>7. All linters</summary>
+<p>
+
+Of course there is a command to ~~rule~~ run all linters in one:
+
+```bash
+make lint
+```
+
+the same as:
+
+```bash
+make test && make check-codestyle && make mypy && make check-safety
+```
+
+</p>
+</details>
+
+<details>
+<summary>8. Docker</summary>
+<p>
+
+```bash
+make docker-build
+```
+
+which is equivalent to:
+
+```bash
+make docker-build VERSION=latest
+```
+
+Remove docker image with
+
+```bash
+make docker-remove
+```
+
+More information [about docker](https://github.com/qrshare/qrshare/tree/master/docker).
+
+</p>
+</details>
+
+<details>
+<summary>9. Cleanup</summary>
+<p>
+Delete pycache files
+
+```bash
+make pycache-remove
+```
+
+Remove package build
+
+```bash
+make build-remove
+```
+
+Delete .DS_STORE files
+
+```bash
+make dsstore-remove
+```
+
+Remove .mypycache
+
+```bash
+make mypycache-remove
+```
+
+Or to remove all above run:
+
+```bash
+make cleanup
+```
+
+</p>
+</details>
+
+## 📈 Releases
+
+You can see the list of available releases on the [GitHub Releases](https://github.com/qrshare/qrshare/releases) page.
+
+We follow [Semantic Versions](https://semver.org/) specification.
+
+We use [`Release Drafter`](https://github.com/marketplace/actions/release-drafter). As pull requests are merged, a draft release is kept up-to-date listing the changes, ready to publish when you’re ready. With the categories option, you can categorize pull requests in release notes using labels.
+
+### List of labels and corresponding titles
+
+|               **Label**               |  **Title in Releases**  |
+| :-----------------------------------: | :---------------------: |
+|       `enhancement`, `feature`        |       🚀 Features       |
+| `bug`, `refactoring`, `bugfix`, `fix` | 🔧 Fixes & Refactoring  |
+|       `build`, `ci`, `testing`        | 📦 Build System & CI/CD |
+|              `breaking`               |   💥 Breaking Changes   |
+|            `documentation`            |    📝 Documentation     |
+|            `dependencies`             | ⬆️ Dependencies updates |
+
+You can update it in [`release-drafter.yml`](https://github.com/qrshare/qrshare/blob/master/.github/release-drafter.yml).
+
+GitHub creates the `bug`, `enhancement`, and `documentation` labels for you. Dependabot creates the `dependencies` label. Create the remaining labels on the Issues tab of your GitHub repository, when you need them.
+
+## 🛡 License
+
+[![License](https://img.shields.io/github/license/qrshare/qrshare)](https://github.com/qrshare/qrshare/blob/master/LICENSE)
+
+This project is licensed under the terms of the `MIT` license. See [LICENSE](https://github.com/qrshare/qrshare/blob/master/LICENSE) for more details.
+
+## 📃 Citation
+
+```bibtex
+@misc{qrshare,
+  author = {qrshare},
+  title = {Awesome `qrshare` is a Python cli/package created with https://github.com/TezRomacH/python-package-template},
+  year = {2022},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/qrshare/qrshare}}
+}
+```
+
+## Credits [![🚀 Your next Python package needs a bleeding-edge project structure.](https://img.shields.io/badge/python--package--template-%F0%9F%9A%80-brightgreen)](https://github.com/TezRomacH/python-package-template)
+
+This project was generated with [`python-package-template`](https://github.com/TezRomacH/python-package-template)

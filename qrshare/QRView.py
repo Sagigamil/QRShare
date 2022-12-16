@@ -1,5 +1,5 @@
 import qrcode
-from src.ViewInterface import ViewInterface
+from .ViewInterface import ViewInterface
 
 
 class QRView(ViewInterface):

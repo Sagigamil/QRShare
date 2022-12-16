@@ -1,6 +1,6 @@
 from ftplib import FTP
 import os
-from src.ClientInterface import ClientInterface
+from ClientInterface import ClientInterface
 
 
 class FTPClient(ClientInterface):
