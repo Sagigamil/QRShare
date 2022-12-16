@@ -51,7 +51,7 @@ def main():
     file_to_upload = sys.argv[-1]
 
     user_config = get_user_config_json()
-    import ipdb; ipdb.set_trace()
+    
     client_class = dynamic_import(user_config['protocol'])
     client_params = user_config['protocol_params']
     client = client_class(**client_params)
