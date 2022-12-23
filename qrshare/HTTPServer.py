@@ -1,10 +1,12 @@
+import os
+import shutil
+import socket
+import ipaddress
+
 from functools import partial
 import http.server as BaseHTTPServer
 from .ClientInterface import ClientInterface
 from threading import Thread
-import os
-import shutil
-import socket
 
 
 class HTTPServer(ClientInterface):
@@ -36,15 +38,12 @@ class HTTPServer(ClientInterface):
 
     def __init__(self,
                  ip="",
-                 port=9595,
-                 protocol_version="HTTP/1.0",
-                 timeout=120):
+                 port=9595):
         self._ip = ip if ip else HTTPServer._get_ip()
         self._port = port
-        self._protocol_version = protocol_version
+        self._protocol_version = "HTTP/1.0"
         self._thread = None
         self._http = None
-        self._timeout = timeout
         self._is_running = True
 
     def shutdown(self):
@@ -56,10 +55,26 @@ class HTTPServer(ClientInterface):
         self.shutdown()
 
     @staticmethod
-    def validate_init_params(self, params):
-        # raise error on bad params. Return nothing
-        pass
-
+    def validate_init_params(**params):
+        if 'ip' not in params.keys():
+            raise Exception('params has no field \'ip\'')
+        
+        if not isinstance(params['ip'], str):
+            raise Exception('param \'ip\' has to be a string')
+        
+        if 'port' not in params.keys():
+            raise Exception('params has no field \'ip\'')
+        
+        if not isinstance(params['port'], int):
+            raise Exception('param \'port\' has to be an int')
+        
+        # check if the ip is a valid ip address:
+        ipaddress.ip_address(params['ip'])
+        
+        # check if the port is a valid port:
+        if params['port'] < 1 or params['port'] > 65535:
+            raise Exception('param \'port\' is invalid')  
+        
     @staticmethod
     def _serve_forever(http):
         while http._is_running:

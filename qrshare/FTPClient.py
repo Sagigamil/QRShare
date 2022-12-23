@@ -13,7 +13,7 @@ class FTPClient(ClientInterface):
         self._ftp = FTP(user=user, passwd=password)
 
     @staticmethod
-    def validate_init_params(self, params):
+    def validate_init_params(**params):
         # raise error on bad params. Return nothing
         pass
 

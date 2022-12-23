@@ -6,5 +6,5 @@ class ClientInterface(object):
         raise NotImplementedError()
 
     @staticmethod
-    def validate_init_params(self, params):
+    def validate_init_params(**params):
         raise NotImplementedError()

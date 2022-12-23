@@ -3,7 +3,7 @@ class ViewInterface(object):
         super(ViewInterface, self).__init__(*args)
 
     @staticmethod
-    def validate_init_params(self, params):
+    def validate_init_params(**params):
         pass
 
     def view(self, str):
