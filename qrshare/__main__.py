@@ -140,6 +140,12 @@ def install_registry():
     os.system(reg_file_path)
     os.remove(reg_file_path)        
 
+def print_usage():
+    print('Usage: uploader.py [--easy-launch-install] file')
+    print('Options:')
+    print('  --easy-launch-install  Install easy launch registry keys')
+    print('  -h, --help             Show this help message')
+
 def main():
     """Main entry point for the QRShare program.
     
@@ -160,16 +166,20 @@ def main():
     it prints an error message and exits with a status code of -1.
     """
     try: 
+        if '-h' in sys.argv or '--help' in sys.argv:
+            print_usage()
+            return 0
+        
         if '--easy-launch-install' in sys.argv:
             install_registry() 
             return 0
         
         if len(sys.argv) <= 1:
-            print('Please specify file to upload')
+            print_usage()
             return -1
 
         if len(sys.argv) != 2:
-            print('Please provide one file only')
+            print_usage()
             return -1
 
         file_to_upload = sys.argv[-1]
