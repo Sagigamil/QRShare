@@ -22,7 +22,6 @@ default_json_file = {
     }
 }
 
-
 def get_user_config_json():
     """
     Retrieves the user's configuration as a JSON object.
@@ -139,7 +138,5 @@ def main():
     path = client.upload(file_to_upload)
     view.view(path)
 
-
 if __name__ == '__main__':
     main()
-    
