@@ -6,17 +6,15 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry]
 name = "qrshare"
 version = "0.1.0"
-description = "Awesome `qrshare` is a Python cli/package created with https://github.com/TezRomacH/python-package-template"
+description = "QRShare is a package python that allow you to share files easly with yout mobile phone view QR code"
 readme = "README.md"
-authors = ["qrshare <hello@qrshare.com>"]
+authors = ["Sagi Gamil <sagigamil9911@gmail.com>"]
 license = "MIT"
-repository = "https://github.com/qrshare/qrshare"
-homepage = "https://github.com/qrshare/qrshare"
+repository = "https://github.com/Sagigamil/QRShare"
+homepage = "https://github.com/Sagigamil/QRShare"
 
-# Keywords description https://python-poetry.org/docs/pyproject/#keywords
-keywords = []  #! Update me
+keywords = []
 
-# Pypi classifiers: https://pypi.org/classifiers/
 classifiers = [  #! Update me
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -35,28 +33,7 @@ classifiers = [  #! Update me
 
 [tool.poetry.dependencies]
 python = "^3.7"
-importlib_metadata = {version = "^4.5.0", python = "<3.8"}
-typer = {extras = ["all"], version = "^0.4.0"}
-rich = "^10.14.0"
 qrcode = {extras = ["pil"], version = "^7.3.1"}
-
-[tool.poetry.dev-dependencies]
-bandit = "^1.7.1"
-black = {version = "^21.10b0", allow-prereleases = true}
-darglint = "^1.8.1"
-isort = {extras = ["colors"], version = "^5.10.1"}
-mypy = "^0.910"
-mypy-extensions = "^0.4.3"
-pre-commit = "^2.15.0"
-pydocstyle = "^6.1.1"
-pylint = "^2.11.1"
-pytest = "^6.2.5"
-pyupgrade = "^2.29.1"
-safety = "^1.10.3"
-coverage = "^6.1.2"
-coverage-badge = "^1.1.0"
-pytest-html = "^3.1.1"
-pytest-cov = "^3.0.0"
 
 
 [tool.black]
