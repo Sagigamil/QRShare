@@ -35,7 +35,7 @@ class QRView(ViewInterface):
             Exception: If any initialization parameters are provided.
         """
         if len(params.keys()) > 0:
-            raise Exception("not expect params, but params were given")
+            raise ValueError("not expect params, but params were given")
 
     def view(self, str):
         """
