@@ -54,7 +54,7 @@ class HTTPServer(ClientInterface):
                 self.send_header("Content-Length", str(fs.st_size))
                 self.end_headers()
                 shutil.copyfileobj(f, self.wfile)
-
+                
             self._http_server._is_running = False
 
     @staticmethod
@@ -91,17 +91,6 @@ class HTTPServer(ClientInterface):
         self._http = None
         self._is_running = True
 
-    def shutdown(self):
-        """
-        Shutdowns the HTTP server.
-
-        This method sets the `_is_running` variable to `False`, which causes the server to stop handling requests.
-        If a `_thread` is running, it will be joined to the main thread.
-        """
-        self._is_running = False
-        if self._thread:
-            self._thread.join()
-
     @staticmethod
     def validate_init_params(**params):
         """
@@ -113,26 +102,27 @@ class HTTPServer(ClientInterface):
             params (dict): A dictionary of parameters passed to the constructor of the HTTPServer class.
 
         Raises:
-            Exception: If the `ip` or `port` fields are missing from the `params` dictionary, or if their values are of the incorrect type, or if the `ip` is an invalid IP address, or if the `port` is outside the valid range (1-65535).
+            ValueError: If the `ip` or `port` fields are missing from the `params` dictionary, or if their values are of the incorrect type, or if the `ip` is an invalid IP address, or if the `port` is outside the valid range (1-65535).
         """
         if 'ip' not in params.keys():
-            raise Exception('params has no field \'ip\'')
+            raise ValueError('params has no field \'ip\'')
         
         if not isinstance(params['ip'], str):
-            raise Exception('param \'ip\' has to be a string')
+            raise ValueError('param \'ip\' has to be a string')
         
         if 'port' not in params.keys():
-            raise Exception('params has no field \'ip\'')
+            raise ValueError('params has no field \'port\'')
         
         if not isinstance(params['port'], int):
-            raise Exception('param \'port\' has to be an int')
+            raise ValueError('param \'port\' has to be an int')
         
         # check if the ip is a valid ip address:
-        ipaddress.ip_address(params['ip'])
+        if params['ip']:
+            ipaddress.ip_address(params['ip'])
         
         # check if the port is a valid port:
         if params['port'] < 1 or params['port'] > 65535:
-            raise Exception('param \'port\' is invalid')  
+            raise ValueError('param \'port\' is invalid')  
         
     @staticmethod
     def _serve_forever(http):
@@ -147,4 +137,4 @@ class HTTPServer(ClientInterface):
         self._http = BaseHTTPServer.HTTPServer((self._ip, self._port), handle_class)
         self._thread = Thread(target=HTTPServer._serve_forever, args=(self,))
         self._thread.start()
-        return socket.gethostbyname(socket.gethostname()) + ":" + str(self._port)
+        return "http://" + self._ip + ":" + str(self._port)

@@ -37,7 +37,7 @@ def get_user_config_json():
         with open(config_file_path, 'r') as f:
             json_config = json.load(f)
             return json_config
-    except Exception as e:
+    except ValueError as e:
         print(f'Read user configuration failed with an error {e}, using default configuration')
         with open(config_file_path, 'w') as f:
             json.dump(default_json_file, f)
@@ -51,7 +51,7 @@ def validate_json(user_json):
         user_json (dict): A dictionary containing the user's configuration.
 
     Raises:
-        Exception: If the user's configuration is invalid.
+        ValueError: If the user's configuration is invalid.
 
     Notes:
         The user's configuration is considered valid if it has the following keys:
@@ -67,17 +67,17 @@ def validate_json(user_json):
     
     for key in keys:
         if key not in user_json.keys():
-            raise Exception(f'User json config has no field \'{key}\'')
+            raise ValueError(f'User json config has no field \'{key}\'')
     
     if 'module' not in user_json['protocol']:
-        raise Exception('User json config has no field \'module\' in \'protocol\'')
+        raise ValueError('User json config has no field \'module\' in \'protocol\'')
     if 'class' not in user_json['protocol']:
-        raise Exception('User json config has no field \'class\' in \'protocol\'')
+        raise ValueError('User json config has no field \'class\' in \'protocol\'')
     
     if 'module' not in user_json['view']:
-        raise Exception('User json config has no field \'module\' in \'view\'')
+        raise ValueError('User json config has no field \'module\' in \'view\'')
     if 'class' not in user_json['view']:
-        raise Exception('User json config has no field \'class\' in \'view\'')
+        raise ValueError('User json config has no field \'class\' in \'view\'')
     
 
 def dynamic_import(module, class_name):
@@ -215,7 +215,7 @@ def main():
     except Exception as ex:
         print(f"QRShare failed, reason: {ex}")
         exit(-1)
-        
+
 
 if __name__ == '__main__':
     main()
