@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import socket
 import importlib
 
 USER_CONFIG_JSON_NAME = 'qrshare_config.json'
@@ -11,7 +12,7 @@ default_json_file = {
         'class' : 'HTTPServer',
     },
     'protocol_params': {
-        'ip': '127.0.0.1',
+        'ip': socket.gethostbyname(socket.gethostname()),
         'port': 7080
     },
     'view': {

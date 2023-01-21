@@ -5,16 +5,16 @@ import requests
 from qrshare.HTTPServer import HTTPServer
 
 
-@pytest.mark.parametrize("port", [7080, 9999, 9876]) 
+@pytest.mark.parametrize("port", [9988, 9999, 9876]) 
 def test_http_server_sanity(port):
     file_content = b'test file'
     file_name = 'file.txt' 
     server = HTTPServer("", port)
     
-    with open('file.txt', 'wb') as f:
+    with open(file_name, 'wb') as f:
         f.write(file_content)
     
-    url = server.upload('file.txt')
+    url = server.upload(file_name)
     assert requests.get(url).content == file_content
 
     
